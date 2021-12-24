@@ -46,6 +46,7 @@ export const useForm = (initialInputs, initialFormValidity) => {
       inputId: id
     });
   }, []);
+  //technically dispatch would be a dependency but there is no need to add it because react ensures that it is not recreated
 
   const setFormData = useCallback((inputData, formValidity) => {
     dispatch({
