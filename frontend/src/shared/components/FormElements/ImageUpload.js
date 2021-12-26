@@ -8,8 +8,9 @@ const ImageUpload = props => {
   const [previewUrl, setPreviewUrl] = useState();
   const [isValid, setIsValid] = useState(false);
 
-  const filePickerRef = useRef();
+  const filePickerRef = useRef(); // useRef is used to get a reference to the input component 
 
+  // This useEffect fires whenever the file changes(i.e. we pick a new file). We use useEffect so that whenever the file is picked this function will run and update the preview
   useEffect(() => {
     if (!file) {
       return;
@@ -24,16 +25,16 @@ const ImageUpload = props => {
   const pickedHandler = event => {
     let pickedFile;
     let fileIsValid = isValid;
-    if (event.target.files && event.target.files.length === 1) {
+    if (event.target.files && event.target.files.length === 1) { // event.target.files is an array that contains the selected files
       pickedFile = event.target.files[0];
       setFile(pickedFile);
       setIsValid(true);
-      fileIsValid = true;
+      fileIsValid = true; // we manually set the validaity value because the value of isValid is not set immediately, it takes some time and when we forward the validity value to the function, it will be the previous value. Thats why we do it manually 
     } else {
       setIsValid(false);
       fileIsValid = false;
     }
-    props.onInput(props.id, pickedFile, fileIsValid);
+    props.onInput(props.id, pickedFile, fileIsValid); // We expect to get a function and forward these 3 information to that function
   };
 
   const pickImageHandler = () => {

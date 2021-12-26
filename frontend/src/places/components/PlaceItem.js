@@ -94,7 +94,8 @@ const PlaceItem = props => {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {auth.userId === props.creatorId && (
+            {auth.userId === props.creatorId && ( // auth.userId === props.creatorId This check ensures that the edit button is only available if the user that has 
+            // created this place is trying to edit. props.createrId is the id of user that created this place and auth.userId is the id of the current user.   
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}
 

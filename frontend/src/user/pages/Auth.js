@@ -64,6 +64,7 @@ const Auth = () => {
     setIsLoginMode(prevMode => !prevMode);
   };
 
+  // Here we send an http request to the backend server 
   const authSubmitHandler = async event => {
     event.preventDefault();
 
@@ -80,7 +81,7 @@ const Auth = () => {
             'Content-Type': 'application/json'
           }
         );
-        auth.login(responseData.userId, responseData.token);
+        auth.login(responseData.userId, responseData.token); // The userId is received from the backend and stored in the context
       } catch (err) {}
     } else {
       try {

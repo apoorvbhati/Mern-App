@@ -10,6 +10,8 @@ export const useHttpClient = () => {
     async (url, method = 'GET', body = null, headers = {}) => {
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();
+      // The activeHttpRequests is an array of abort controller. It is being used to ensure that we never continue with a
+      // request that is on its way out if we then switch away from the component that triggered it
       activeHttpRequests.current.push(httpAbortCtrl);
 
       try {
@@ -26,6 +28,8 @@ export const useHttpClient = () => {
           reqCtrl => reqCtrl !== httpAbortCtrl
         );
 
+        // if the respose is a 400 or 500 it is not considered a error and therefor the catch block is not triggered. 
+        // So we check if the response is not ok that means we have a 400 or 500 and in that case we throw an error
         if (!response.ok) {
           throw new Error(responseData.message);
         }

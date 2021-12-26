@@ -9,6 +9,8 @@ const Users = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedUsers, setLoadedUsers] = useState();
 
+  // fetchUsers is an IIFY
+  // we wrap the fetch call in useEffect cause we only want to display the users when the page renders and not when it re renders
   useEffect(() => {
     const fetchUsers = async () => {
       try {

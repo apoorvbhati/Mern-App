@@ -53,7 +53,7 @@ const NewPlace = () => {
       await sendRequest(process.env.REACT_APP_BACKEND_URL + '/places', 'POST', formData, {
         Authorization: 'Bearer ' + auth.token
       });
-      history.push('/');
+      history.push('/'); // After creation of new place, we redirect the user to the homepage. There is also a replace method on history object which does not allows us to get to the previous page
     } catch (err) {}
   };
 
